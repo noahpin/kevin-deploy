@@ -79,7 +79,7 @@ client.once('ready', () => {
         });
     })
 });
-client.login(process.env.BOT_TOKEN);
+client.login("NzE0NjAyNTQxMTU3MTg3NjY1.Xs8EoA.fB3v0YXU9hC6GGhfkRsEcnuVoKs");
 
 client.on('message', message => {
     var kbChann = client.channels.cache.get(database.kbchann);
