@@ -291,6 +291,8 @@ process.exit();
                     { name: 'k.setup', value: 'Starts product setup prompt for pre-existing product & channel. Run this in the channel ' },
                     { name: 'k.exit', value: 'Exits product creation process' },
                     { name: 'k.remove [product name]', value: 'Deletes a product. **WARNING** this action can *not* be undone! *Example:* `k.remove chicken nuggies`' },
+                    { name: 'k.softremove [product name]', value: 'Deletes a product except for its channel. **WARNING** this action can *not* be undone! *Example:* `k.softremove chicken nuggies`' },
+                    { name: 'k.ping', value: 'Gets kevins ping' },
                     { name: 'k.extras', value: 'Sends the infamous image' },
                     { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
                     { name: 'k.soon', value: 'Soon:tm:' },
@@ -300,6 +302,7 @@ process.exit();
                 .setColor("#8fffab")
                 .addFields(
                     { name: 'k.help', value: 'You are here. Displays a help message for `k e v i n`' },
+                    { name: 'k.ping', value: 'Gets kevins ping' },
                     { name: 'k.extras', value: 'Sends the infamous image' },
                     { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
                     { name: 'k.soon', value: 'Soon:tm:' },
@@ -309,7 +312,11 @@ process.exit();
             message.channel.send("dummy message");
             message.delete();
         }
-        
+        if (message.content.startsWith("k.ping") && message.member.id == "180929397107326976") {
+            message.channel.send('Pinging...').then(sent => {
+                sent.edit(`Pong! Took ${sent.createdTimestamp - message.createdTimestamp}ms`);
+            });
+        }
         if (message.channel.id == database.kevinspeak) {
             var channel = message.member.guild.channels.cache.find(ch => ch.name === 'general-chat');
             channel.send("```>_ " + message.content.toUpperCase().split('').join(' ') + "```")
@@ -323,6 +330,7 @@ process.exit();
                 .addField("Please reply with 'yes' or 'no'", "_ _")
                 .setColor("#ff8f8f"));
             currAction = "prod_remove";
+            newProdUser = message.member.id
 
         }else if (message.content.startsWith("k.softremove")) {
             delProd = message.content.substring(13);
@@ -332,9 +340,10 @@ process.exit();
                 .addField("Please reply with 'yes' or 'no'", "_ _")
                 .setColor("#ff8f8f"));
             currAction = "prod_softremove";
+            newProdUser = message.member.id
 
         }
-        if (currAction == "prod_remove") {
+        if (currAction == "prod_remove" && message.member.id == newProdUser) {
             var found = false;
             var index;
             for (let i = 0; i < database.products.length; i++) {
@@ -449,7 +458,7 @@ process.exit();
                     .setColor("#ff8f8f")
                     .setDescription("That is not a valid product. Please try again"));
             }
-        }else if (currAction == "prod_softremove") {
+        }else if (currAction == "prod_softremove" && message.member.id == newProdUser) {
             var found = false;
             var index;
             for (let i = 0; i < database.products.length; i++) {
