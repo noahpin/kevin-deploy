@@ -295,6 +295,7 @@ process.exit();
                     { name: 'k.ping', value: 'Gets kevins ping' },
                     { name: 'k.extras', value: 'Sends the infamous image' },
                     { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
+                    { name: 'k.tracking OR k.trackingalready', value: 'You guys are getting your tracking numbers already?' },
                     { name: 'k.soon', value: 'Soon:tm:' },
                 ));
             }else{ message.channel.send(new MessageEmbed()
@@ -305,6 +306,7 @@ process.exit();
                     { name: 'k.ping', value: 'Gets kevins ping' },
                     { name: 'k.extras', value: 'Sends the infamous image' },
                     { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
+                    { name: 'k.tracking OR k.trackingalready', value: 'You guys are getting your tracking numbers already?' },
                     { name: 'k.soon', value: 'Soon:tm:' },
                 ));}
         }
@@ -1272,6 +1274,8 @@ process.exit();
             message.channel.send({ files: ["https://i.imgur.com/MVmKw32.png"] })
         } else if (message.content.startsWith("k.friedextras") || message.content.startsWith("k.fried")) {
             message.channel.send({ files: ["https://media.discordapp.net/attachments/545053174231466004/720456942690107452/friedextras.png"] })
+        } else if (message.content.startsWith("k.trackingalready") || message.content.startsWith("k.tracking")) {
+            message.channel.send({ files: ["https://cdn.discordapp.com/attachments/715060226755395645/722968428796706856/45hh7o.jpg"] })
         } else if (message.content.startsWith("k.makura") || message.content.startsWith("k.makurastangies")) {
             message.channel.send("https://makurastangerines.now.sh/")
         } else if (message.content.startsWith("k.longday")) {
