@@ -1589,8 +1589,8 @@ client.on("raw", (event) => {
     }
 })
 client.on('messageReactionAdd', (messageReaction, user) => {
-    var roleName = database.roles[database.emotes.indexOf(messageReaction.emoji.name)]
-    var role = messageReaction.message.guild.roles.cache.find(role => role.name === roleName)
+    var roleName = database.products[database.emotes.indexOf(messageReaction.emoji.name)].roleId
+    var role = messageReaction.message.guild.roles.cache.find(role => role.id === roleName)
     if (role) {
         var member = messageReaction.message.guild.members.cache.find(member => member.id === user.id)
         if (messageReaction.message.channel.id == database.kbchann||messageReaction.message.channel.id == database.kcchann||messageReaction.message.channel.id == database.mcchann) {
@@ -1599,8 +1599,8 @@ client.on('messageReactionAdd', (messageReaction, user) => {
     }
 })
 client.on('messageReactionRemove', (messageReaction, user) => {
-    var roleName = database.roles[database.emotes.indexOf(messageReaction.emoji.name)]
-    var role = messageReaction.message.guild.roles.cache.find(role => role.name === roleName)
+    var roleName = database.products[database.emotes.indexOf(messageReaction.emoji.name)].roleId
+    var role = messageReaction.message.guild.roles.cache.find(role => role.id === roleName)
     if (role) {
         var member = messageReaction.message.guild.members.cache.find(member => member.id === user.id)
         if (messageReaction.message.channel.id == database.kbchann||messageReaction.message.channel.id == database.kcchann||messageReaction.message.channel.id == database.mcchann) {
