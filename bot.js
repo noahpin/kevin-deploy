@@ -1595,7 +1595,7 @@ client.on('messageReactionAdd', (messageReaction, user) => {
         var member = messageReaction.message.guild.members.cache.find(member => member.id === user.id)
         if (messageReaction.message.channel.id == database.kbchann||messageReaction.message.channel.id == database.kcchann||messageReaction.message.channel.id == database.mcchann) {
             member.roles.add(role.id)
-        }
+        }//owo
     }
 })
 client.on('messageReactionRemove', (messageReaction, user) => {
