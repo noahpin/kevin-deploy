@@ -1325,7 +1325,7 @@ function isDate(value) {
 
 setInterval(() => {
     updateProdList()
-}, 600000);
+}, 3600000);
 
 function getStatus(gbS, gbE) {
     if (gbS == "N/A" || gbE == "N/A") {
@@ -1427,7 +1427,7 @@ async function updateProdList() {
 
                     fetchedMsg.react(prod.emote);
                 });
-                kcMsg[Math.floor(kcAmt / 20)] = kcMsg[Math.floor(kcAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + prod.gbStart+" - "+prod.gbEnd+"|"+prod.link
+                kcMsg[Math.floor(kcAmt / 20)] = kcMsg[Math.floor(kcAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + getStatus(prod.gbStart, prod.gbEnd)+"|"+prod.link
                 kcAmt++;
                 //console.log(kcMsg[0] + "\n\n")
                 //console.log(kcMsg[1] + "\n\n")
@@ -1438,7 +1438,7 @@ async function updateProdList() {
                     const fetchedMsg = msg.first();
                     fetchedMsg.react(prod.emote)
                 });
-                kbMsg[Math.floor(kbAmt / 20)] = kbMsg[Math.floor(kbAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + prod.gbStart+" - "+prod.gbEnd+"|"+prod.link
+                kbMsg[Math.floor(kbAmt / 20)] = kbMsg[Math.floor(kbAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + getStatus(prod.gbStart, prod.gbEnd)+"|"+prod.link
                 kbAmt++;
             } else if (JSON.stringify(prod.type).includes("Mc") || JSON.stringify(prod.type).includes("mc") || JSON.stringify(prod.type).includes("Misc") || JSON.stringify(prod.type).includes("misc") || JSON.stringify(prod.type).includes("Miscellaneous") || JSON.stringify(prod.type).includes("miscellaneous")) {
                 misc.push(prod)
@@ -1447,7 +1447,7 @@ async function updateProdList() {
                     const fetchedMsg = msg.first();
                     fetchedMsg.react(prod.emote);
                 });
-                mcMsg[Math.floor(mcAmt / 20)] = mcMsg[Math.floor(mcAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + prod.gbStart+" - "+prod.gbEnd+"|"+prod.link
+                mcMsg[Math.floor(mcAmt / 20)] = mcMsg[Math.floor(mcAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + getStatus(prod.gbStart, prod.gbEnd)+"|"+prod.link
                 mcAmt++;
             }
         }
