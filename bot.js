@@ -295,6 +295,8 @@ process.exit();
                     { name: 'k.ping', value: 'Gets kevins ping' },
                     { name: 'k.extras', value: 'Sends the infamous image' },
                     { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
+                    { name: 'k.jsontangies OR k.jsonfruitstand', value: 'yes' },
+                    { name: 'k.friedtangies OR k.friedfruitstand', value: 'yes, but fried' },
                     { name: 'k.tracking OR k.trackingalready', value: 'You guys are getting your tracking numbers already?' },
                     { name: 'k.soon', value: 'Soon:tm:' },
                 ));
@@ -306,6 +308,8 @@ process.exit();
                     { name: 'k.ping', value: 'Gets kevins ping' },
                     { name: 'k.extras', value: 'Sends the infamous image' },
                     { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
+                    { name: 'k.jsontangies OR k.jsonfruitstand', value: 'yes' },
+                    { name: 'k.friedtangies OR k.friedfruitstand', value: 'yes, but fried' },
                     { name: 'k.tracking OR k.trackingalready', value: 'You guys are getting your tracking numbers already?' },
                     { name: 'k.soon', value: 'Soon:tm:' },
                 ));}
@@ -1272,6 +1276,10 @@ process.exit();
         //console.dir(newProd)
         if (message.content.startsWith("k.extras")) {
             message.channel.send({ files: ["https://i.imgur.com/MVmKw32.png"] })
+        } else if (message.content.startsWith("k.friedtangies") || message.content.startsWith("k.friedfruitstand")) {
+            message.channel.send({ files: ["https://discordapp.com/channels/@me/720362568882847848/727240871057162240"] })
+        } else if (message.content.startsWith("k.jsontangies") || message.content.startsWith("k.jsonfruitstand")) {
+            message.channel.send({ files: ["https://media.discordapp.net/attachments/627193533052223526/727238107631583282/Untitled-2.png"] })
         } else if (message.content.startsWith("k.friedextras") || message.content.startsWith("k.fried")) {
             message.channel.send({ files: ["https://media.discordapp.net/attachments/545053174231466004/720456942690107452/friedextras.png"] })
         } else if (message.content.startsWith("k.trackingalready") || message.content.startsWith("k.tracking")) {
