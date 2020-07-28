@@ -281,14 +281,14 @@ client.on('message', message => {
                 }, 1000)
             }, 2000)
         }
-        if (message.content.startsWith("k.tangiepasta") || message.content.startsWith("k.tp")) {
+        if(message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976"){if (message.content.startsWith("k.tangiepasta") || message.content.startsWith("k.tp")) {
             message.channel.send(new MessageEmbed()
                 .setTitle("**WANT INFO ON TANGIE TUESDAY?**")
                 .setColor("#8fffab")
                 .setDescription(
                     "**We are expecting this restock to sell quickly**\nLast time we ran an in-stock buy of our Tangerine Switches, we sold out in less than 3 minutes. We will have more in-stock than last time. We advise to be online before the sell time is live and know what you’d like to order beforehand\n\n**Orders will ship out as soon as they can**\nThere will be a high volume of orders. It’ll take time for our fulfillment center to sort and pack everything.\n\n**We aren’t cool with after-market pricing**\nWe understand that there will be folks buying to profit off our products. To alleviate some of this, we will be enforcing a limit per customer: 12 packs of Tangies of each weight per customer.\n\n**The debut of lube on TKC, along with our new MX Cherry Switch Opener**\nFor the first time ever, we will be selling lube on TKC! We will first be offering Krytox 205g0, 105, and 106… More to come soon.\n\n**More Tangerines are on their way**\nWe have already ordered more and once they arrive, we will be able to host another in-stock buy. Please keep in touch with us on social media for news and updates.\n\n**Our other fruit switches are coming soon**\nWe are still planning on rolling out the rest of the fruit switch family, Thank-you so much for your patience, we’ve got some surprises in-store as we really appreciate the community waiting!\n\n**We’re dedicated to helping the community**\nAbuse towards the TKC team will be taken seriously. Complaints unrelated to an order and personal threats will have consequences. We are passionate about the same things you are and we are here to take care of you.\n\nWith that said… \n**Tangie Tuesday starts on Tuesday, July 28th at 9:00PM Eastern.**"
                 ));
-        }
+        }}
         if (message.content.startsWith("k.news") || message.content.startsWith("k.n")) {
             message.channel.send(new MessageEmbed()
                 .setTitle("**PLEASE READ THE NEWS!**")
@@ -343,7 +343,7 @@ client.on('message', message => {
             message.channel.send("dummy message");
             message.delete();
         }
-        if (message.content.startsWith("k.ping") && message.member.id == "180929397107326976") {
+        if (message.content.startsWith("k.ping") && message.member.id == "180929397107326976"&& message.channel.id == "609043831173808139") {
             message.channel.send('Pinging...').then(sent => {
                 sent.edit(`Pong! Took ${sent.createdTimestamp - message.createdTimestamp}ms`);
             });
