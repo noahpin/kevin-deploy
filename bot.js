@@ -302,7 +302,7 @@ client.on('message', message => {
         if (message.content.startsWith("k.site") || message.content.startsWith("k.w")) {
             message.delete();
             message.channel.send(new MessageEmbed()
-                .setTitle("**READ THE BLOG POST!**")
+                .setTitle("**COLLECTION PAGE!**")
                 .setColor("#8fffab")
                 .setURL(
                     "https://thekey.company/collections/tangie-tuesday"
