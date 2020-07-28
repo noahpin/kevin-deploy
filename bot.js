@@ -80,7 +80,7 @@ client.once('ready', () => {
         });
     })
 });
-client.login("NzE0NjAyNTQxMTU3MTg3NjY1.XulaIQ._BLUCnR2Iz5GSTwvUMsFbdyiWQo");
+client.login("NzE0NjAyNTQxMTU3MTg3NjY1.XsxDeg.z1rVAqKP813SrXu6M8rHLQYo_jk");
 
 client.on('message', message => {
     var kbChann = client.channels.cache.get(database.kbchann);
