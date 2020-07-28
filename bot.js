@@ -282,6 +282,7 @@ client.on('message', message => {
             }, 2000)
         }
         if(message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976"){if (message.content.startsWith("k.tangiepasta") || message.content.startsWith("k.tp")) {
+            message.delete();
             message.channel.send(new MessageEmbed()
                 .setTitle("**WANT INFO ON TANGIE TUESDAY?**")
                 .setColor("#8fffab")
@@ -290,11 +291,21 @@ client.on('message', message => {
                 ));
         }}
         if (message.content.startsWith("k.news") || message.content.startsWith("k.n")) {
+            message.delete();
             message.channel.send(new MessageEmbed()
                 .setTitle("**PLEASE READ THE NEWS!**")
                 .setColor("#8fffab")
                 .setDescription(
                     "To find an answer to your Tangerine Tuesday questions, please read the recent posts in <#544955050594926592>"
+                ));
+        }
+        if (message.content.startsWith("k.site") || message.content.startsWith("k.w")) {
+            message.delete();
+            message.channel.send(new MessageEmbed()
+                .setTitle("**READ THE BLOG POST!**")
+                .setColor("#8fffab")
+                .setTitle(
+                    "https://thekey.company/collections/tangie-tuesday"
                 ));
         }
         if (message.content.startsWith("k.help")) {
@@ -343,7 +354,7 @@ client.on('message', message => {
             message.channel.send("dummy message");
             message.delete();
         }
-        if (message.content.startsWith("k.ping") && message.member.id == "180929397107326976"&& message.channel.id == "609043831173808139") {
+        if (message.content.startsWith("k.ping") && message.member.id == "180929397107326976" && message.channel.id == "720389576538980453") {
             message.channel.send('Pinging...').then(sent => {
                 sent.edit(`Pong! Took ${sent.createdTimestamp - message.createdTimestamp}ms`);
             });
