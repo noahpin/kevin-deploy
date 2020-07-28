@@ -304,7 +304,7 @@ client.on('message', message => {
             message.channel.send(new MessageEmbed()
                 .setTitle("**READ THE BLOG POST!**")
                 .setColor("#8fffab")
-                .setUrl(
+                .setURL(
                     "https://thekey.company/collections/tangie-tuesday"
                 ));
         }
