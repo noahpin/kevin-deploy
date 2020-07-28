@@ -30,28 +30,29 @@ var server = require('http').createServer(app);
 // https://expressjs.com/en/starter/static-files.html
 app.use(express.static("public"));
 app.get("/", (request, response) => {
-  console.log(Date.now() + " ping recieved");
-  response.sendFile(__dirname + "/views/index.html");
-  response.sendStatus(200)
+    console.log(Date.now() + " ping recieved");
+    response.sendFile(__dirname + "/views/index.html");
+    response.sendStatus(200)
 })
-const listener = server.listen(process.env.PORT, function() {
-  console.log('your app is listening on port ' + listener.address().port);
+const listener = server.listen(process.env.PORT, function () {
+    console.log('your app is listening on port ' + listener.address().port);
 });
 setInterval(() => {
-  http.get(`http://thekevin-company.glitch.me/`)
-;}, 280000)
+    http.get(`http://thekevin-company.glitch.me/`)
+        ;
+}, 280000)
 
 // our default array of dreams
 const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
+    "Find and count some sheep",
+    "Climb a really tall mountain",
+    "Wash the dishes"
 ];
 
 // send the default array of dreams to the webpage
 app.get("/dreams", (request, response) => {
-  // express helps us take JS objects and send them as JSON
-  response.json(dreams);
+    // express helps us take JS objects and send them as JSON
+    response.json(dreams);
 });
 
 
@@ -87,7 +88,7 @@ client.on('message', message => {
     var mcChann = client.channels.cache.get(database.mcchann);
     if (message.member.id != "714602541157187665") {
         if (message.channel.id == database.verifchann) {
-            if (message.content.toLowerCase().includes("k." )&& message.content.toLowerCase().includes("marko")) {
+            if (message.content.toLowerCase().includes("k.") && message.content.toLowerCase().includes("marko")) {
                 let role = message.guild.roles.cache.find(r => r.name === "verified");
                 message.delete()
                 message.member.roles.add(role)
@@ -195,7 +196,7 @@ client.on('message', message => {
                                 message.channel.send(err)
                                 throw err;
                             }
-process.exit();
+                            process.exit();
                         });
                     })
                 })
@@ -212,7 +213,7 @@ process.exit();
             }); message.delete();
             //console.log(`${database.products[editProdI].name} -> ${editProdNew}`)
         }
-      if (message.content.toLowerCase().startsWith("k.editmsg") && message.member.id == "180929397107326976") {
+        if (message.content.toLowerCase().startsWith("k.editmsg") && message.member.id == "180929397107326976") {
             var id = message.content.split(" ").splice(1, 1)
             var newMsg = message.content.split(" ").splice(2).join(" ")
             //console.log(newMsg)
@@ -220,7 +221,7 @@ process.exit();
                 const fetchedMsg = msg.first();
                 if (fetchedMsg.author.id == "714602541157187665") {
                     fetchedMsg.edit(newMsg);
-                  return
+                    return
                 } else {
                     message.channel.send(new MessageEmbed()
                         .setTitle("**COMMAND FAILED**")
@@ -228,25 +229,27 @@ process.exit();
                         .setDescription("I did not send that message."))
                 }
             });
-        }else if (message.content.startsWith("k.edit")) {
-            if(message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976"){var editEmbed;
-            var descString = "Send the number of the product you would like to edit!\n";
-            //message.channel.startTyping();
-            for (let i = 0; i < database.products.length; i++) {
-                const prod = database.products[i];
-                //console.log(prod)
-                descString += ("_ _", "`" + (i + 1) + "` - " + prod.name + '\n')
+        } else if (message.content.startsWith("k.edit")) {
+            if (message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976") {
+                var editEmbed;
+                var descString = "Send the number of the product you would like to edit!\n";
+                //message.channel.startTyping();
+                for (let i = 0; i < database.products.length; i++) {
+                    const prod = database.products[i];
+                    //console.log(prod)
+                    descString += ("_ _", "`" + (i + 1) + "` - " + prod.name + '\n')
+                }
+                /*setTimeout(() => {
+                    message.channel.stopTyping();
+                },1000)*/
+                editEmbed = new MessageEmbed()
+                    .setTitle("**EDIT PRODUCT**")
+                    .setColor("#8fffab")
+                    .setDescription(descString);
+                //console.log(editEmbed)
+                message.channel.send(editEmbed).then(msg => { editProdID = msg.id })
+                currAction = "edit_choose"
             }
-            /*setTimeout(() => {
-                message.channel.stopTyping();
-            },1000)*/
-            editEmbed = new MessageEmbed()
-                .setTitle("**EDIT PRODUCT**")
-                .setColor("#8fffab")
-                .setDescription(descString);
-            //console.log(editEmbed)
-            message.channel.send(editEmbed).then(msg => { editProdID = msg.id })
-            currAction = "edit_choose"}
         }
         if (message.content.startsWith("k.evin") && message.author.id == "180929397107326976") {
             var msgArr = ["hello", "i am kevin", "i am a cybernetic interface designed to assist TKC with this server", "i was also designed to send whats known as a hilarious image at the call of a command", "try using k.help in #bot-commands to see what you can use"]
@@ -278,41 +281,59 @@ process.exit();
                 }, 1000)
             }, 2000)
         }
-        if (message.content.startsWith("k.help")) {
-            if (message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976"){
-                message.channel.send(new MessageEmbed()
-                .setTitle("**K E V I N   H E L P**")
+        if (message.content.startsWith("k.tangiepasta") || message.content.startsWith("k.tp")) {
+            message.channel.send(new MessageEmbed()
+                .setTitle("**WANT INFO ON TANGIE TUESDAY?**")
                 .setColor("#8fffab")
-                .addFields(
-                    { name: 'k.help', value: 'You are here. Displays a help message for `k e v i n`' },
-                    { name: 'k.send', value: 'Sends a dummy message. Mostly used for debug purposes' },
-                    { name: 'k.editMsg [message id] [new message]', value: 'Edits a message sent by `k e v i n` *Example:* `k.edit 718595494032703591 This is an edited message`' },
-                    { name: 'k.new', value: 'Starts product creation prompt for a new product' },
-                    { name: 'k.setup', value: 'Starts product setup prompt for pre-existing product & channel. Run this in the channel ' },
-                    { name: 'k.exit', value: 'Exits product creation process' },
-                    { name: 'k.remove [product name]', value: 'Deletes a product. **WARNING** this action can *not* be undone! *Example:* `k.remove chicken nuggies`' },
-                    { name: 'k.softremove [product name]', value: 'Deletes a product except for its channel. **WARNING** this action can *not* be undone! *Example:* `k.softremove chicken nuggies`' },
-                    { name: 'k.ping', value: 'Gets kevins ping' },
-                    { name: 'k.extras', value: 'Sends the infamous image' },
-                    { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
-                    { name: 'k.jsontangies OR k.jsonfruitstand', value: 'yes' },
-                    { name: 'k.friedtangies OR k.friedfruitstand', value: 'yes, but fried' },
-                    { name: 'k.tracking OR k.trackingalready', value: 'You guys are getting your tracking numbers already?' },
-                    { name: 'k.soon', value: 'Soon:tm:' },
+                .setDescription(
+                    "**We are expecting this restock to sell quickly**\nLast time we ran an in-stock buy of our Tangerine Switches, we sold out in less than 3 minutes. We will have more in-stock than last time. We advise to be online before the sell time is live and know what you’d like to order beforehand\n\n**Orders will ship out as soon as they can**\nThere will be a high volume of orders. It’ll take time for our fulfillment center to sort and pack everything.\n\n**We aren’t cool with after-market pricing**\nWe understand that there will be folks buying to profit off our products. To alleviate some of this, we will be enforcing a limit per customer: 12 packs of Tangies of each weight per customer.\n\n**The debut of lube on TKC, along with our new MX Cherry Switch Opener**\nFor the first time ever, we will be selling lube on TKC! We will first be offering Krytox 205g0, 105, and 106… More to come soon.\n\n**More Tangerines are on their way**\nWe have already ordered more and once they arrive, we will be able to host another in-stock buy. Please keep in touch with us on social media for news and updates.\n\n**Our other fruit switches are coming soon**\nWe are still planning on rolling out the rest of the fruit switch family, Thank-you so much for your patience, we’ve got some surprises in-store as we really appreciate the community waiting!\n\n**We’re dedicated to helping the community**\nAbuse towards the TKC team will be taken seriously. Complaints unrelated to an order and personal threats will have consequences. We are passionate about the same things you are and we are here to take care of you.\n\nWith that said… \n**Tangie Tuesday starts on Tuesday, July 28th at 9:00PM Eastern.**"
                 ));
-            }else{ message.channel.send(new MessageEmbed()
-                .setTitle("**K E V I N   H E L P**")
+        }
+        if (message.content.startsWith("k.news") || message.content.startsWith("k.n")) {
+            message.channel.send(new MessageEmbed()
+                .setTitle("**PLEASE READ THE NEWS!**")
                 .setColor("#8fffab")
-                .addFields(
-                    { name: 'k.help', value: 'You are here. Displays a help message for `k e v i n`' },
-                    { name: 'k.ping', value: 'Gets kevins ping' },
-                    { name: 'k.extras', value: 'Sends the infamous image' },
-                    { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
-                    { name: 'k.jsontangies OR k.jsonfruitstand', value: 'yes' },
-                    { name: 'k.friedtangies OR k.friedfruitstand', value: 'yes, but fried' },
-                    { name: 'k.tracking OR k.trackingalready', value: 'You guys are getting your tracking numbers already?' },
-                    { name: 'k.soon', value: 'Soon:tm:' },
-                ));}
+                .setDescription(
+                    "<#544955050594926592>"
+                ));
+        }
+        if (message.content.startsWith("k.help")) {
+            if (message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976") {
+                message.channel.send(new MessageEmbed()
+                    .setTitle("**K E V I N   H E L P**")
+                    .setColor("#8fffab")
+                    .addFields(
+                        { name: 'k.help', value: 'You are here. Displays a help message for `k e v i n`' },
+                        { name: 'k.send', value: 'Sends a dummy message. Mostly used for debug purposes' },
+                        { name: 'k.editMsg [message id] [new message]', value: 'Edits a message sent by `k e v i n` *Example:* `k.edit 718595494032703591 This is an edited message`' },
+                        { name: 'k.new', value: 'Starts product creation prompt for a new product' },
+                        { name: 'k.setup', value: 'Starts product setup prompt for pre-existing product & channel. Run this in the channel ' },
+                        { name: 'k.exit', value: 'Exits product creation process' },
+                        { name: 'k.remove [product name]', value: 'Deletes a product. **WARNING** this action can *not* be undone! *Example:* `k.remove chicken nuggies`' },
+                        { name: 'k.softremove [product name]', value: 'Deletes a product except for its channel. **WARNING** this action can *not* be undone! *Example:* `k.softremove chicken nuggies`' },
+                        { name: 'k.ping', value: 'Gets kevins ping' },
+                        { name: 'k.extras', value: 'Sends the infamous image' },
+                        { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
+                        { name: 'k.jsontangies OR k.jsonfruitstand', value: 'yes' },
+                        { name: 'k.friedtangies OR k.friedfruitstand', value: 'yes, but fried' },
+                        { name: 'k.tracking OR k.trackingalready', value: 'You guys are getting your tracking numbers already?' },
+                        { name: 'k.soon', value: 'Soon:tm:' },
+                    ));
+            } else {
+                message.channel.send(new MessageEmbed()
+                    .setTitle("**K E V I N   H E L P**")
+                    .setColor("#8fffab")
+                    .addFields(
+                        { name: 'k.help', value: 'You are here. Displays a help message for `k e v i n`' },
+                        { name: 'k.ping', value: 'Gets kevins ping' },
+                        { name: 'k.extras', value: 'Sends the infamous image' },
+                        { name: 'k.fried OR k.friedextras', value: 'Sends the infamous image, but deepfried' },
+                        { name: 'k.jsontangies OR k.jsonfruitstand', value: 'yes' },
+                        { name: 'k.friedtangies OR k.friedfruitstand', value: 'yes, but fried' },
+                        { name: 'k.tracking OR k.trackingalready', value: 'You guys are getting your tracking numbers already?' },
+                        { name: 'k.soon', value: 'Soon:tm:' },
+                    ));
+            }
         }
         if (message.content.startsWith("k.send") && message.member.id == "180929397107326976") {
             message.channel.send("dummy message");
@@ -338,7 +359,7 @@ process.exit();
             currAction = "prod_remove";
             newProdUser = message.member.id
 
-        }else if (message.content.startsWith("k.softremove")) {
+        } else if (message.content.startsWith("k.softremove")) {
             delProd = message.content.substring(13);
             message.channel.send(new MessageEmbed()
                 .setTitle("**ARE YOU SURE YOU WANT TO DO THIS?**")
@@ -464,7 +485,7 @@ process.exit();
                     .setColor("#ff8f8f")
                     .setDescription("That is not a valid product. Please try again"));
             }
-        }else if (currAction == "prod_softremove" && message.member.id == newProdUser) {
+        } else if (currAction == "prod_softremove" && message.member.id == newProdUser) {
             var found = false;
             var index;
             for (let i = 0; i < database.products.length; i++) {
@@ -475,63 +496,63 @@ process.exit();
                 }
             }
             if (found && message.content.startsWith("yes")) {
-                
+
 
                 if (database.products[index].type == "Keyboards") {
                     client.channels.cache.get("720364084008189984").messages.fetch(database.kbrr[Math.floor(index / 20)]).then(msg => {
                         //const fetchedMsg = msg.first();
                         message.guild.roles.cache.get(database.products[index].roleId).delete().then(() => {
-                                database.products.splice(index, 1)
-                                msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
-                                    database.emotes.splice(index, 1)
-                                    database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
-                                        if (err) {
-                                            message.channel.send(err)
-                                            throw err;
-                                        }
-                                    });
-                                })
-
+                            database.products.splice(index, 1)
+                            msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
+                                database.emotes.splice(index, 1)
+                                database.roles.splice(index, 1)
+                                fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    if (err) {
+                                        message.channel.send(err)
+                                        throw err;
+                                    }
+                                });
                             })
+
+                        })
 
                     });
                 } else if (database.products[index].type == "Keycaps") {
                     client.channels.cache.get("720365204692795431").messages.fetch(database.kcrr[Math.floor(index / 20)]).then(msg => {
                         //const fetchedMsg = msg.first();
                         message.guild.roles.cache.get(database.products[index].roleId).delete().then(() => {
-                                database.products.splice(index, 1)
-                                msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
-                                    database.emotes.splice(index, 1)
-                                    database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
-                                        if (err) {
-                                            message.channel.send(err)
-                                            throw err;
-                                        }
-                                    });
-                                })
-
+                            database.products.splice(index, 1)
+                            msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
+                                database.emotes.splice(index, 1)
+                                database.roles.splice(index, 1)
+                                fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    if (err) {
+                                        message.channel.send(err)
+                                        throw err;
+                                    }
+                                });
                             })
+
+                        })
 
                     });
                 } else if (database.products[index].type == "Miscellaneous") {
                     client.channels.cache.get("718228835971235883").messages.fetch(database.mcrr[Math.floor(index / 20)]).then(msg => {
                         //const fetchedMsg = msg.first();
                         message.guild.roles.cache.get(database.products[index].roleId).delete().then(() => {
-                                database.products.splice(index, 1)
-                                msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
-                                    database.emotes.splice(index, 1)
-                                    database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
-                                        if (err) {
-                                            message.channel.send(err)
-                                            throw err;
-                                        }
-                                    });
-                                })
-
+                            database.products.splice(index, 1)
+                            msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
+                                database.emotes.splice(index, 1)
+                                database.roles.splice(index, 1)
+                                fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    if (err) {
+                                        message.channel.send(err)
+                                        throw err;
+                                    }
+                                });
                             })
+
+                        })
 
                     });
                 }
@@ -579,7 +600,7 @@ process.exit();
                                         message.channel.send(err)
                                         throw err;
                                     }
-                                  process.exit();
+                                    process.exit();
                                 });
                             })
 
@@ -603,7 +624,7 @@ process.exit();
                                             message.channel.send(err)
                                             throw err;
                                         }
-                                      process.exit();
+                                        process.exit();
                                     });
                                 })
 
@@ -626,7 +647,7 @@ process.exit();
                                             message.channel.send(err)
                                             throw err;
                                         }
-                                      process.exit();
+                                        process.exit();
                                     });
                                 })
 
@@ -648,7 +669,7 @@ process.exit();
                                             message.channel.send(err)
                                             throw err;
                                         }
-                                      process.exit();
+                                        process.exit();
                                     });
                                 })
 
@@ -677,7 +698,7 @@ process.exit();
                     .setDescription("That is not a valid product. Please try again"));
             }
         }
-        if (message.content.startsWith("k.purge") && message.member.roles.cache.find(r => r.name === "Mods") ) {
+        if (message.content.startsWith("k.purge") && message.member.roles.cache.find(r => r.name === "Mods")) {
             message.channel.bulkDelete(100)
         }
         if (newProdUser == message.member.id) {
@@ -953,7 +974,7 @@ process.exit();
                                         message.channel.send(err)
                                         throw err;
                                     }
-                                  process.exit();
+                                    process.exit();
                                 });
                             })
                         })
@@ -1247,7 +1268,7 @@ process.exit();
                                         message.channel.send(err)
                                         throw err;
                                     }
-                                  process.exit();
+                                    process.exit();
                                 });
                             })
                         })
@@ -1293,28 +1314,30 @@ process.exit();
         } else if (message.content.startsWith("k.soon")) {
             message.channel.send({ files: ["https://cdn.discordapp.com/attachments/715077589827584081/715366729429024799/soontm.gif"] })
         } else if (message.content.startsWith("k.new")) {
-            if(message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976"){
-              const DeleteEmbed = new MessageEmbed()
-                .setTitle("**NEW PRODUCT**")
-                .setColor("#8fffab")
-                .setDescription("Enter Products Name");
-            message.channel.send(DeleteEmbed).then(message => {
-                newProdId = (message.id)
-            });
-            currAction = "prod_name"
-            newProdUser = message.member.id;}
+            if (message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976") {
+                const DeleteEmbed = new MessageEmbed()
+                    .setTitle("**NEW PRODUCT**")
+                    .setColor("#8fffab")
+                    .setDescription("Enter Products Name");
+                message.channel.send(DeleteEmbed).then(message => {
+                    newProdId = (message.id)
+                });
+                currAction = "prod_name"
+                newProdUser = message.member.id;
+            }
         }
         else if (message.content.startsWith("k.setup")) {
-            if(message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976"){
-              const DeleteEmbed = new MessageEmbed()
-                .setTitle("**SETUP PRE-EXISTING PRODUCT**")
-                .setColor("#8fffab")
-                .setDescription("Enter Products Name");
-            message.channel.send(DeleteEmbed).then(message => {
-                newProdId = (message.id)
-            });
-            currAction = "stp_prod_name"
-            newProdUser = message.member.id;}
+            if (message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976") {
+                const DeleteEmbed = new MessageEmbed()
+                    .setTitle("**SETUP PRE-EXISTING PRODUCT**")
+                    .setColor("#8fffab")
+                    .setDescription("Enter Products Name");
+                message.channel.send(DeleteEmbed).then(message => {
+                    newProdId = (message.id)
+                });
+                currAction = "stp_prod_name"
+                newProdUser = message.member.id;
+            }
         }
 
     }
@@ -1435,7 +1458,7 @@ async function updateProdList() {
 
                     fetchedMsg.react(prod.emote);
                 });
-                kcMsg[Math.floor(kcAmt / 20)] = kcMsg[Math.floor(kcAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + getStatus(prod.gbStart, prod.gbEnd)+"|"+prod.link
+                kcMsg[Math.floor(kcAmt / 20)] = kcMsg[Math.floor(kcAmt / 20)] + "\n" + prod.emote + " `" + prod.name + "` | " + getStatus(prod.gbStart, prod.gbEnd) + "|" + prod.link
                 kcAmt++;
                 //console.log(kcMsg[0] + "\n\n")
                 //console.log(kcMsg[1] + "\n\n")
@@ -1446,7 +1469,7 @@ async function updateProdList() {
                     const fetchedMsg = msg.first();
                     fetchedMsg.react(prod.emote)
                 });
-                kbMsg[Math.floor(kbAmt / 20)] = kbMsg[Math.floor(kbAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + getStatus(prod.gbStart, prod.gbEnd)+"|"+prod.link
+                kbMsg[Math.floor(kbAmt / 20)] = kbMsg[Math.floor(kbAmt / 20)] + "\n" + prod.emote + " `" + prod.name + "` | " + getStatus(prod.gbStart, prod.gbEnd) + "|" + prod.link
                 kbAmt++;
             } else if (JSON.stringify(prod.type).includes("Mc") || JSON.stringify(prod.type).includes("mc") || JSON.stringify(prod.type).includes("Misc") || JSON.stringify(prod.type).includes("misc") || JSON.stringify(prod.type).includes("Miscellaneous") || JSON.stringify(prod.type).includes("miscellaneous")) {
                 misc.push(prod)
@@ -1455,7 +1478,7 @@ async function updateProdList() {
                     const fetchedMsg = msg.first();
                     fetchedMsg.react(prod.emote);
                 });
-                mcMsg[Math.floor(mcAmt / 20)] = mcMsg[Math.floor(mcAmt / 20)] + "\n"+prod.emote+" `"+prod.name+"` | " + getStatus(prod.gbStart, prod.gbEnd)+"|"+prod.link
+                mcMsg[Math.floor(mcAmt / 20)] = mcMsg[Math.floor(mcAmt / 20)] + "\n" + prod.emote + " `" + prod.name + "` | " + getStatus(prod.gbStart, prod.gbEnd) + "|" + prod.link
                 mcAmt++;
             }
         }
@@ -1601,7 +1624,7 @@ client.on('messageReactionAdd', (messageReaction, user) => {
     var role = messageReaction.message.guild.roles.cache.find(role => role.name === roleName)
     if (role) {
         var member = messageReaction.message.guild.members.cache.find(member => member.id === user.id)
-        if (messageReaction.message.channel.id == database.kbchann||messageReaction.message.channel.id == database.kcchann||messageReaction.message.channel.id == database.mcchann) {
+        if (messageReaction.message.channel.id == database.kbchann || messageReaction.message.channel.id == database.kcchann || messageReaction.message.channel.id == database.mcchann) {
             member.roles.add(role.id)
         }//owo
     }
@@ -1611,7 +1634,7 @@ client.on('messageReactionRemove', (messageReaction, user) => {
     var role = messageReaction.message.guild.roles.cache.find(role => role.name === roleName)
     if (role) {
         var member = messageReaction.message.guild.members.cache.find(member => member.id === user.id)
-        if (messageReaction.message.channel.id == database.kbchann||messageReaction.message.channel.id == database.kcchann||messageReaction.message.channel.id == database.mcchann) {
+        if (messageReaction.message.channel.id == database.kbchann || messageReaction.message.channel.id == database.kcchann || messageReaction.message.channel.id == database.mcchann) {
             member.roles.remove(role.id)
         }
     }
