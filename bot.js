@@ -294,7 +294,7 @@ client.on('message', message => {
                 .setTitle("**PLEASE READ THE NEWS!**")
                 .setColor("#8fffab")
                 .setDescription(
-                    "<#544955050594926592>"
+                    "To find an answer to your Tangerine Tuesday questions, please read the recent posts in <#544955050594926592>"
                 ));
         }
         if (message.content.startsWith("k.help")) {
@@ -321,11 +321,9 @@ client.on('message', message => {
                     ));
             } else {
                 message.channel.send(new MessageEmbed()
-                .setTitle("**WANT TO SEE PRODUCT CHANNELS?**")
-                .setColor("#8fffab")
-                .setDescription("Go into these channels and choose which ones you want to be part of!\n <#720365009737220209> <#720364084008189984> <#720365204692795431>"));
-                  message.channel.send(new MessageEmbed()
-                .setTitle("**K E V I N   H E L P**"))
+                    .setTitle("**WANT TO SEE PRODUCT CHANNELS?**")
+                    .setColor("#8fffab")
+                    .setDescription("Go into these channels and choose which ones you want to be part of!\n <#720365009737220209> <#720364084008189984> <#720365204692795431>"));
                 message.channel.send(new MessageEmbed()
                     .setTitle("**K E V I N   H E L P**")
                     .setColor("#8fffab")
