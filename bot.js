@@ -281,7 +281,7 @@ client.on('message', message => {
                 }, 1000)
             }, 2000)
         }
-        if(message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976"){if (message.content.startsWith("k.tangiepasta") || message.content.startsWith("k.tp")) {
+        if(message.member.roles.cache.find(r => r.name === "Mods") ||message.member.roles.cache.find(r => r.name === "Senior Staff") ||message.member.roles.cache.find(r => r.name === "Staff") || message.member.roles.cache.find(r => r.name === "Designers") || message.member.id == "180929397107326976"){if (message.content.startsWith("k.tangiepasta") || message.content.startsWith("k.tp")) {
             message.delete();
             message.channel.send(new MessageEmbed()
                 .setTitle("**WANT INFO ON TANGIE TUESDAY?**")
