@@ -188,10 +188,10 @@ client.on('message', message => {
                 var guild = client.guilds.cache.get()
                 client.channels.cache.get(database.products[editProdI].chanId).edit({
                     topic: `${database.products[editProdI].emote} GB from ${database.products[editProdI].gbStart} to ${database.products[editProdI].gbEnd} | ${database.products[editProdI].link}`,
-                    name: database.products[editProdI].name,
+                    name: database.products[editProdI].emote + " " + database.products[editProdI].name,
                 }).then(() => {
                     message.guild.roles.cache.find(c => c.id === database.products[editProdI].roleId).edit({ name: database.products[editProdI].name }).then(() => {
-                        fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                        fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                             if (err) {
                                 message.channel.send(err)
                                 throw err;
@@ -403,7 +403,7 @@ client.on('message', message => {
                             msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                 database.emotes.splice(index, 1)
                                 database.roles.splice(index, 1)
-                                fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                     if (err) {
                                         message.channel.send(err)
                                         throw err;
@@ -426,7 +426,7 @@ client.on('message', message => {
                                 msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                     database.emotes.splice(index, 1)
                                     database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                         if (err) {
                                             message.channel.send(err)
                                             throw err;
@@ -447,7 +447,7 @@ client.on('message', message => {
                                 msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                     database.emotes.splice(index, 1)
                                     database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                         if (err) {
                                             message.channel.send(err)
                                             throw err;
@@ -468,7 +468,7 @@ client.on('message', message => {
                                 msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                     database.emotes.splice(index, 1)
                                     database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                         if (err) {
                                             message.channel.send(err)
                                             throw err;
@@ -521,7 +521,7 @@ client.on('message', message => {
                             msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                 database.emotes.splice(index, 1)
                                 database.roles.splice(index, 1)
-                                fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                     if (err) {
                                         message.channel.send(err)
                                         throw err;
@@ -540,7 +540,7 @@ client.on('message', message => {
                             msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                 database.emotes.splice(index, 1)
                                 database.roles.splice(index, 1)
-                                fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                     if (err) {
                                         message.channel.send(err)
                                         throw err;
@@ -559,7 +559,7 @@ client.on('message', message => {
                             msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                 database.emotes.splice(index, 1)
                                 database.roles.splice(index, 1)
-                                fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                     if (err) {
                                         message.channel.send(err)
                                         throw err;
@@ -610,7 +610,7 @@ client.on('message', message => {
                             msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                 database.emotes.splice(index, 1)
                                 database.roles.splice(index, 1)
-                                fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                     if (err) {
                                         message.channel.send(err)
                                         throw err;
@@ -634,7 +634,7 @@ client.on('message', message => {
                                 msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                     database.emotes.splice(index, 1)
                                     database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                         if (err) {
                                             message.channel.send(err)
                                             throw err;
@@ -657,7 +657,7 @@ client.on('message', message => {
                                 msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                     database.emotes.splice(index, 1)
                                     database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                         if (err) {
                                             message.channel.send(err)
                                             throw err;
@@ -679,7 +679,7 @@ client.on('message', message => {
                                 msg.reactions.cache.get(`${database.emotes[index]}`).remove().then(() => {
                                     database.emotes.splice(index, 1)
                                     database.roles.splice(index, 1)
-                                    fs.writeFile('db.json', JSON.stringify(database), (err) => {
+                                    fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
                                         if (err) {
                                             message.channel.send(err)
                                             throw err;
@@ -984,7 +984,7 @@ client.on('message', message => {
                                 json.roles.push(newProd.name);
                                 newJson = json;
                                 //console.dir(json)
-                                fs.writeFile('db.json', JSON.stringify(json), (err) => {
+                                fs.writeFile('db.json', JSON.stringify(json, null, 4), (err) => {
                                     if (err) {
                                         message.channel.send(err)
                                         throw err;
@@ -1278,7 +1278,7 @@ client.on('message', message => {
                                 json.roles.push(newProd.name);
                                 newJson = json;
                                 //console.dir(json)
-                                fs.writeFile('db.json', JSON.stringify(json), (err) => {
+                                fs.writeFile('db.json', JSON.stringify(json, null, 4), (err) => {
                                     if (err) {
                                         message.channel.send(err)
                                         throw err;
@@ -1445,7 +1445,7 @@ async function updateProdList() {
         }
     }
     if (havetoupdateJSON == true) {
-        fs.writeFile('db.json', JSON.stringify(database), (err) => {
+        fs.writeFile('db.json', JSON.stringify(database, null, 4), (err) => {
             if (err) {
                 message.channel.send(err)
                 throw err;
