@@ -11,7 +11,7 @@ var currAction = null;
 var newProd = null;
 var newProdUser = null;
 var newProdId = null;
-var database;
+var database; // literally everything lol
 var logChann;
 var delProd;
 var editProdI;
@@ -19,6 +19,15 @@ var editField;
 var editProdID;
 var editProdNew;
 var prod;
+
+fs.readFile('db.json', function (err, data) {
+    if (err) {
+        logChann.send(err)
+        throw err;
+    }
+    database = JSON.parse(data);
+    client.login(database.TOKEN);
+})
 
 
 
@@ -80,20 +89,12 @@ client.once('ready', () => {
         });
     })
 });
-client.login("NzE0NjAyNTQxMTU3MTg3NjY1.XsxDeg.z1rVAqKP813SrXu6M8rHLQYo_jk");
 
 client.on('message', message => {
     var kbChann = client.channels.cache.get(database.kbchann);
     var kcChann = client.channels.cache.get(database.kcchann);
     var mcChann = client.channels.cache.get(database.mcchann);
     if (message.member.id != "714602541157187665") {
-        if (message.channel.id == database.verifchann) {
-            if (message.content.toLowerCase().includes("k.") && message.content.toLowerCase().includes("marko")) {
-                let role = message.guild.roles.cache.find(r => r.name === "verified");
-                message.delete()
-                message.member.roles.add(role)
-            }
-        }
         if (currAction == "edit_choose") {
             //console.log(database.products[parseInt(message.content, 10) - 1].name)
             //console.log(parseInt(message.content, 10) - 1)
@@ -280,33 +281,6 @@ client.on('message', message => {
                     }, 4000)
                 }, 1000)
             }, 2000)
-        }
-        if(message.member.roles.cache.find(r => r.name === "Mods") ||message.member.roles.cache.find(r => r.name === "Senior Staff") ||message.member.roles.cache.find(r => r.name === "Staff") || message.member.roles.cache.find(r => r.name === "Designers") || message.member.id == "180929397107326976"){if (message.content.startsWith("k.tangiepasta") || message.content.startsWith("k.tp")) {
-            message.delete();
-            message.channel.send(new MessageEmbed()
-                .setTitle("**WANT INFO ON TANGIE TUESDAY?**")
-                .setColor("#8fffab")
-                .setDescription(
-                    "**We are expecting this restock to sell quickly**\nLast time we ran an in-stock buy of our Tangerine Switches, we sold out in less than 3 minutes. We will have more in-stock than last time. We advise to be online before the sell time is live and know what you’d like to order beforehand\n\n**Orders will ship out as soon as they can**\nThere will be a high volume of orders. It’ll take time for our fulfillment center to sort and pack everything.\n\n**We aren’t cool with after-market pricing**\nWe understand that there will be folks buying to profit off our products. To alleviate some of this, we will be enforcing a limit per customer: 12 packs of Tangies of each weight per customer.\n\n**The debut of lube on TKC, along with our new MX Cherry Switch Opener**\nFor the first time ever, we will be selling lube on TKC! We will first be offering Krytox 205g0, 105, and 106… More to come soon.\n\n**More Tangerines are on their way**\nWe have already ordered more and once they arrive, we will be able to host another in-stock buy. Please keep in touch with us on social media for news and updates.\n\n**Our other fruit switches are coming soon**\nWe are still planning on rolling out the rest of the fruit switch family, Thank-you so much for your patience, we’ve got some surprises in-store as we really appreciate the community waiting!\n\n**We’re dedicated to helping the community**\nAbuse towards the TKC team will be taken seriously. Complaints unrelated to an order and personal threats will have consequences. We are passionate about the same things you are and we are here to take care of you.\n\nWith that said… \n**Tangie Tuesday starts on Tuesday, July 28th at 9:00PM Eastern.**"
-                ));
-        }}
-        if (message.content.startsWith("k.news") || message.content.startsWith("k.n")) {
-            message.delete();
-            message.channel.send(new MessageEmbed()
-                .setTitle("**PLEASE READ THE NEWS!**")
-                .setColor("#8fffab")
-                .setDescription(
-                    "To find an answer to your Tangerine Tuesday questions, please read the recent posts in <#544955050594926592>"
-                ));
-        }
-        if (message.content.startsWith("k.site") || message.content.startsWith("k.w")) {
-            message.delete();
-            message.channel.send(new MessageEmbed()
-                .setTitle("**TANGIE TUESDAY COLLECTION PAGE HERE!**")
-                .setColor("#8fffab")
-                .setURL(
-                    "https://thekey.company/collections/tangie-tuesday"
-                ));
         }
         if (message.content.startsWith("k.help")) {
             if (message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976") {
@@ -1567,7 +1541,6 @@ function getTimeTillDate(d1, d2) {
     return message;
 }
 client.on("messageDelete", (messageDelete) => {
-    if (messageDelete.channel != "691013459554336878" || messageDelete.channel != database.verifchann) {
         // Send the message to a designated channel on a server:
         const channel = messageDelete.member.guild.channels.cache.find(ch => ch.name === 'kevin-logs');
 
@@ -1581,7 +1554,7 @@ client.on("messageDelete", (messageDelete) => {
             .setFooter(`Message ID: ${messageDelete.id} | Author ID: ${messageDelete.author.id}`);
 
         channel.send(DeleteEmbed);
-    }
+    
 });
 client.on("messageUpdate", (oldMessage, newMessage) => {
     if (oldMessage.channel != "691013459554336878") {
