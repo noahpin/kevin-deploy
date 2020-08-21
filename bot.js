@@ -334,9 +334,13 @@ client.on('message', message => {
             });
         }
         if (message.channel.id == database.kevinspeak) {
-            var channel = message.member.guild.channels.cache.find(ch => ch.name === 'general-chat');
-            channel.send("```>_ " + message.content.toUpperCase().split('').join(' ') + "```")
-            message.delete()
+            var channel = message.member.guild.channels.cache.find(ch => ch.name === 'designers-corner');
+            if (message.attachments.array().length > 0) {
+                let img = message.attachments.array()[0].proxyURL;
+                channel.send("```>_ " + message.content.toUpperCase().split('').join(' ') + "```", { files: [img]})
+            }else {
+                channel.send("```>_ " + message.content.toUpperCase().split('').join(' ') + "```")
+            }
         }
         if (message.content.startsWith("k.remove")) {
             delProd = message.content.substring(9);
@@ -1541,20 +1545,20 @@ function getTimeTillDate(d1, d2) {
     return message;
 }
 client.on("messageDelete", (messageDelete) => {
-        // Send the message to a designated channel on a server:
-        const channel = messageDelete.member.guild.channels.cache.find(ch => ch.name === 'kevin-logs');
+    // Send the message to a designated channel on a server:
+    const channel = messageDelete.member.guild.channels.cache.find(ch => ch.name === 'kevin-logs');
 
 
-        const DeleteEmbed = new MessageEmbed()
-            .setTitle("**DELETED MESSAGE**")
-            .setColor("#fc3c3c")
-            .addField("Author", messageDelete.author.tag, true)
-            .addField("Channel", messageDelete.channel, true)
-            .addField("Message", messageDelete.content)
-            .setFooter(`Message ID: ${messageDelete.id} | Author ID: ${messageDelete.author.id}`);
+    const DeleteEmbed = new MessageEmbed()
+        .setTitle("**DELETED MESSAGE**")
+        .setColor("#fc3c3c")
+        .addField("Author", messageDelete.author.tag, true)
+        .addField("Channel", messageDelete.channel, true)
+        .addField("Message", messageDelete.content)
+        .setFooter(`Message ID: ${messageDelete.id} | Author ID: ${messageDelete.author.id}`);
 
-        channel.send(DeleteEmbed);
-    
+    channel.send(DeleteEmbed);
+
 });
 client.on("messageUpdate", (oldMessage, newMessage) => {
     if (oldMessage.channel != "691013459554336878") {
