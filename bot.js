@@ -282,6 +282,23 @@ client.on('message', message => {
                 }, 1000)
             }, 2000)
         }
+        
+        if (message.content.startsWith("k.kiwipasta") || message.content.startsWith("k.kp")) {
+            message.channel.send(new MessageEmbed()
+                .setTitle("**WANT INFO ON KIWI KUESDAY?**")
+                .setColor("#8fffab")
+                .setDescription(
+                    "Please read the carefully crafted blog post here! https://thekey.company/blogs/blog-updates/welcome-to-kiwi-kuesday"
+                ));
+        }
+        if (message.content.startsWith("k.news") || message.content.startsWith("k.n")) {
+            message.channel.send(new MessageEmbed()
+                .setTitle("**PLEASE READ THE NEWS!**")
+                .setColor("#8fffab")
+                .setDescription(
+                    "To find an answer to your Kiwi Kuesday questions, please read the recent posts in <#544955050594926592>"
+                ));
+        }
         if (message.content.startsWith("k.help")) {
             if (message.member.roles.cache.find(r => r.name === "Mods") || message.member.id == "180929397107326976") {
                 message.channel.send(new MessageEmbed()
